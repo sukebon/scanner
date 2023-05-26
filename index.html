@@ -54,19 +54,18 @@
           }
           let timerId 
           document.getElementById('startButton').addEventListener('click', () => {
-            timerId  = setInterval(()=>{
-              console.log("ss")
-              codeReader.decodeFromVideoDevice(undefined, 'video', (result, err) => {
-                if (result) {
+            codeReader.decodeFromVideoDevice(undefined, 'video', (result, err) => {
+              timerId  = setInterval(()=>{
+                 if (result) {
                   console.log("result",result)
                   document.getElementById('result').value += result.text + "\n"
                   // document.getElementById('result').textContent = result.text
-                }
-                if (err && !(err instanceof ZXing.NotFoundException)) {
-                  console.error(err)
-                }
+                 }
+                 if (err && !(err instanceof ZXing.NotFoundException)) {
+                   console.error(err)
+                 }
+                },2000)
               })
-            },2000)
           })
 
           document.getElementById('resetButton').addEventListener('click', () => {
