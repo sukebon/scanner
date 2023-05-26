@@ -5,38 +5,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="ZXing for JS">
-
-  <title>ZXing TypeScript </title>
-
+  <title>SCANNER</title>
+  
   <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
-    href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-  <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
-    href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
-  <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
-    href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
+  href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link href="/dist/output.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-
-  <main class="wrapper" style="padding-top:2em">
-
-    <section class="container" id="demo-content">
-      <h1 class="title">Scan</h1>
-
-      <div>
-        <a class="button" id="startButton">Start</a>
-        <a class="button" id="resetButton">Reset</a>
+  <main class="relative h-screen">
+    <section class="relative flex flex-col items-center h-screen p-6" id="demo-content">
+      <div class="absolute w-full text-center bottom-5">
+        <button id="startButton" class="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-none shadow-sm">Start</button>
+        <button id="resetButton" class="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-none shadow-sm">Reset</button>
       </div>
 
       <div>
         <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
       </div>
-      <div>
-        <textarea id='result'  rows='100' style="width:300px;  height: 500px;"></textarea>
+      <div class='mt-6 mb-20'>
+        <textarea id='result' class='border p-2'  rows='100' style="width:300px;  height: 300px;"></textarea>
       </div>
-
     </section>
-
   </main>
 
   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
@@ -76,7 +67,5 @@
         })
     })
   </script>
-
 </body>
-
 </html>
