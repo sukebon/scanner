@@ -52,22 +52,27 @@
             console.log("deviceId",videoInputDevices[0].deviceId)
             console.log("deviceLabel",videoInputDevices[0].label)
           }
-
+          let timerId 
           document.getElementById('startButton').addEventListener('click', () => {
-            codeReader.decodeFromVideoDevice(undefined, 'video', (result, err) => {
-              if (result) {
-                console.log("result",result)
-                document.getElementById('result').value += result.text + "\n"
-                // document.getElementById('result').textContent = result.text
-              }
-              if (err && !(err instanceof ZXing.NotFoundException)) {
-                console.error(err)
-              }
-            })
+            timerId  = setInterval(()=>{
+              console.log("ss")
+              codeReader.decodeFromVideoDevice(undefined, 'video', (result, err) => {
+                if (result) {
+                  console.log("result",result)
+                  document.getElementById('result').value += result.text + "\n"
+                  // document.getElementById('result').textContent = result.text
+                }
+                if (err && !(err instanceof ZXing.NotFoundException)) {
+                  console.error(err)
+                }
+              })
+            },2000)
           })
 
           document.getElementById('resetButton').addEventListener('click', () => {
             codeReader.reset()
+            document.getElementById('result').value = ""
+            clearInterval(timerId)
             console.log('Reset.')
           })
 
