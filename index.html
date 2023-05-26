@@ -52,14 +52,12 @@
             console.log("deviceId",videoInputDevices[0].deviceId)
             console.log("deviceLabel",videoInputDevices[0].label)
           }
-          let intervalId
           document.getElementById('startButton').addEventListener('click', () => {
             codeReader.decodeFromVideoDevice(undefined, 'video', (result, err) => {        
                  if (result) {
-                  setTimeout(()=>{
                     console.log("result",result)
                     document.getElementById('result').value += result.text + "\n"
-                  },2000)
+                    codeReader.reset()
                  }
                  if (err && !(err instanceof ZXing.NotFoundException)) {
                    console.error(err)
@@ -68,7 +66,6 @@
           })
           document.getElementById('resetButton').addEventListener('click', () => {
             codeReader.reset()
-            clearInterval(intervalId)
             document.getElementById('result').value = ""
             console.log('Reset.')
           })
