@@ -2,7 +2,6 @@ window.addEventListener('load', function () {
   function audio() {
     document.getElementById('btn_audio').currentTime = 0;
     document.getElementById('btn_audio').play();
-    console.log("audio");
   }
   let selectedDeviceId;
   const codeReader = new ZXing.BrowserMultiFormatReader();
@@ -26,6 +25,7 @@ window.addEventListener('load', function () {
             let li = document.createElement('li');
             li.textContent = result.text;
             document.getElementById('result').appendChild(li);
+            document.getElementById('count').textContent = array.length;
           }
           if (err && !(err instanceof ZXing.NotFoundException)) {
             console.error(err);
@@ -40,6 +40,7 @@ window.addEventListener('load', function () {
         ul.classList.add(["p-2"]);
         document.getElementById('list-area').appendChild(ul);
         array = [];
+        document.getElementById('count').textContent = array.length;
       });
 
     })

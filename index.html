@@ -17,15 +17,21 @@
   <main class="relative h-screen">
     <section class="relative flex flex-col items-center h-screen p-6" id="demo-content">
       <div class="fixed w-full text-center bottom-2">
-        <button id="startButton" class="px-10 py-2 font-semibold text-lg bg-sky-500 text-white shadow-sm">SCAN</button>
-        <button id="resetButton" class="px-10 py-2 font-semibold text-lg bg-red-500 text-white shadow-sm">Reset</button>
+        <div class='flex justify-center'>
+          <div class='mr-2'>件数</div>
+          <div id='count'>0</div>
+        </div>
+        <div class='mt-2'>
+          <button id="startButton" class="px-10 py-2 font-semibold text-lg bg-sky-500 text-white shadow-sm">SCAN</button>
+          <button id="resetButton" class="px-10 py-2 font-semibold text-lg bg-red-500 text-white shadow-sm">Reset</button>
+        </div>
       </div>
 
       <div>
         <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
       </div>
-      <div id='list-area' class='border mt-6 mb-20 overflow-y-auto' style='width:300px; height:300px;'>
-        <ul id='result' class='p-2'></ul>
+      <div id='list-area' class='border mt-6 mb-20 max-h-72 overflow-y-auto' style='width:300px; min-height:100px;'>
+        <ul id='result' class='p-2'> </ul>
       </div>
       <audio id="btn_audio">
         <source src="./audio/audio-scan.mp3" type="audio/mp3">
@@ -35,7 +41,7 @@
 
   <script src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
   <script src="src/main.js"></script>
- 
+
 </body>
 
 </html>
