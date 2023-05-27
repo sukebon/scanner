@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="ZXing for JS">
   <title>SCANNER</title>
-  
+
   <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
-  href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
   <link href="/dist/output.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -25,56 +25,17 @@
         <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
       </div>
       <div id='list-area' class='border mt-6 mb-20 overflow-y-auto' style='width:300px; height:300px;'>
-        <ul id='result' class='p-2' ></ul>
+        <ul id='result' class='p-2'></ul>
       </div>
+      <audio id="btn_audio">
+        <source src="./audio/audio-scan.mp3" type="audio/mp3">
+      </audio>
     </section>
   </main>
 
-  <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
-  <script type="text/javascript">
-    window.addEventListener('load', function () {
-      let selectedDeviceId;
-      const codeReader = new ZXing.BrowserMultiFormatReader()
-      codeReader.listVideoInputDevices()
-        .then((videoInputDevices) => {
-          
-          selectedDeviceId = videoInputDevices[0].deviceId
-          if (videoInputDevices.length >= 1) {
-            console.log("deviceId",videoInputDevices[0].deviceId)
-            console.log("deviceLabel",videoInputDevices[0].label)
-          }
-          let array = []
-          document.getElementById('startButton').addEventListener('click', () => {
-            codeReader.decodeFromVideoDevice(undefined, 'video', (result, err) => {        
-                 if (result) {
-                    console.log("result",result)
-                    const isInclude = array.includes(result.text)
-                    if(isInclude) return
-                    array.push(result.text)
-                    let li = document.createElement('li')
-                    li.textContent = result.text
-                    document.getElementById('result').appendChild(li)
-                 }
-                 if (err && !(err instanceof ZXing.NotFoundException)) {
-                   console.error(err)
-                 }         
-              })
-          })
-          document.getElementById('resetButton').addEventListener('click', () => {
-            codeReader.reset()
-            document.getElementById('result').remove()
-            let ul = document.createElement("ul")
-            ul.id = "result"
-            ul.classList.add(["p-2"])
-            document.getElementById('list-area').appendChild(ul)
-            array = []
-          })
-
-        })
-        .catch((err) => {
-          console.error(err)
-        })
-    })
-  </script>
+  <script src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
+  <script src="src/main.js"></script>
+ 
 </body>
+
 </html>
