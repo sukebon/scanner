@@ -16,16 +16,16 @@
 <body>
   <main class="relative h-screen">
     <section class="relative flex flex-col items-center h-screen p-6" id="demo-content">
-      <div class="absolute w-full text-center bottom-20">
-        <button id="startButton" class="px-10 py-2 font-semibold text-lg bg-sky-500 text-white shadow-sm">Start</button>
-        <button id="resetButton" class="px-10 py-2 font-semibold text-lg bg-sky-500 text-white shadow-sm">Reset</button>
+      <div class="fixed w-full text-center bottom-2">
+        <button id="startButton" class="px-10 py-2 font-semibold text-lg bg-sky-500 text-white shadow-sm">SCAN</button>
+        <button id="resetButton" class="px-10 py-2 font-semibold text-lg bg-red-500 text-white shadow-sm">Reset</button>
       </div>
 
       <div>
         <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
       </div>
-      <div class='mt-6 mb-20'>
-        <textarea id='result' class='border p-2'  rows='100' style="width:300px;  height: 300px;"></textarea>
+      <div id='list-area' class='border mt-6 mb-20 overflow-y-auto' style='width:300px; height:300px;'>
+        <ul id='result' class='p-2' ></ul>
       </div>
     </section>
   </main>
@@ -43,12 +43,17 @@
             console.log("deviceId",videoInputDevices[0].deviceId)
             console.log("deviceLabel",videoInputDevices[0].label)
           }
+          let array = []
           document.getElementById('startButton').addEventListener('click', () => {
-            codeReader.decodeFromVideoDevice(undefined, 'video', (result, err) => {        
+            codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {        
                  if (result) {
                     console.log("result",result)
-                    document.getElementById('result').value += result.text + "\n"
-                    codeReader.reset()
+                    const isInclude = array.includes(result.text)
+                    if(isInclude) return
+                    array.push(result.text)
+                    let li = document.createElement('li')
+                    li.textContent = result.text
+                    document.getElementById('result').appendChild(li)
                  }
                  if (err && !(err instanceof ZXing.NotFoundException)) {
                    console.error(err)
@@ -57,8 +62,12 @@
           })
           document.getElementById('resetButton').addEventListener('click', () => {
             codeReader.reset()
-            document.getElementById('result').value = ""
-            console.log('Reset.')
+            document.getElementById('result').remove()
+            let ul = document.createElement("ul")
+            ul.id = "result"
+            ul.classList.add(["p-2"])
+            document.getElementById('list-area').appendChild(ul)
+            array = []
           })
 
         })
