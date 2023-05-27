@@ -45,7 +45,7 @@
           }
           let array = []
           document.getElementById('startButton').addEventListener('click', () => {
-            codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {        
+            codeReader.decodeFromVideoDevice(undefined, 'video', (result, err) => {        
                  if (result) {
                     console.log("result",result)
                     const isInclude = array.includes(result.text)
