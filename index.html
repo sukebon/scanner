@@ -1,47 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SCANNER</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="ZXing for JS">
-  <title>SCANNER</title>
-
-  <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
-    href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-  <link href="/dist/output.css" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body>
-  <main class="relative h-screen">
-    <section class="relative flex flex-col items-center h-screen p-6" id="demo-content">
-      <div class="fixed w-full text-center bottom-2">
-        <div class='flex justify-center'>
-          <div class='mr-2'>件数</div>
-          <div id='count'>0</div>
+  <body>
+    <main class="relative h-screen">
+      <section class="relative flex flex-col items-center h-screen p-6">
+        <div class="fixed w-full text-center bottom-2">
+          <div class="flex justify-center">
+            <div class="mr-2">件数</div>
+            <div id="count">0</div>
+          </div>
+          <div class="mt-2">
+            <button
+              id="startButton"
+              class="px-10 py-2 font-semibold text-lg bg-sky-500 text-white shadow-sm"
+            >
+              SCAN
+            </button>
+            <button
+              id="resetButton"
+              class="px-10 py-2 font-semibold text-lg bg-red-500 text-white shadow-sm"
+            >
+              Reset
+            </button>
+          </div>
         </div>
-        <div class='mt-2'>
-          <button id="startButton" class="px-10 py-2 font-semibold text-lg bg-sky-500 text-white shadow-sm">SCAN</button>
-          <button id="resetButton" class="px-10 py-2 font-semibold text-lg bg-red-500 text-white shadow-sm">Reset</button>
+
+        <div>
+          <video
+            id="video"
+            width="300"
+            height="200"
+            style="border: 1px solid gray"
+          ></video>
         </div>
-      </div>
+        <div
+          id="list-area"
+          class="border mt-6 mb-20 max-h-72 overflow-y-auto"
+          style="width: 300px; min-height: 100px"
+        >
+          <ul id="result" class="p-2"></ul>
+        </div>
+        <audio id="btn_audio">
+          <source src="./audio/audio-scan.mp3" type="audio/mp3" />
+        </audio>
+      </section>
+    </main>
 
-      <div>
-        <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
-      </div>
-      <div id='list-area' class='border mt-6 mb-20 max-h-72 overflow-y-auto' style='width:300px; min-height:100px;'>
-        <ul id='result' class='p-2'> </ul>
-      </div>
-      <audio id="btn_audio">
-        <source src="./audio/audio-scan.mp3" type="audio/mp3">
-      </audio>
-    </section>
-  </main>
-
-  <script src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
-  <script src="src/main.js"></script>
-
-</body>
-
+    <script src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
+    <script src="/main.js"></script>
+  </body>
 </html>
