@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SCANNER</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"
+      defer
+    ></script>
+    <script src="/main.js" defer></script>
   </head>
-
   <body>
     <main class="relative h-screen">
       <section class="relative flex flex-col items-center h-screen p-6">
@@ -30,7 +34,6 @@
             </button>
           </div>
         </div>
-
         <div>
           <video
             id="video"
@@ -51,8 +54,5 @@
         </audio>
       </section>
     </main>
-
-    <script src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
-    <script src="/main.js"></script>
   </body>
 </html>
